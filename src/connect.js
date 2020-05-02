@@ -1,4 +1,5 @@
 module.exports.handler = (event, context, callback) => {
-  console.log(event, context)
-  callback(true)
-}
+  const { connectionId } = event.requestContext;
+  console.log(event, context);
+  callback(null, { statusCode: 200 });
+};
