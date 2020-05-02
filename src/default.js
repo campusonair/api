@@ -1,13 +1,23 @@
+const util = require("util");
+const AWS = require("aws-sdk");
+
+/**
+ * おうむ返しをする WebSocket 関数
+ * @param {string} url API Gateway URL
+ * @param {string} connectionId connectionId
+ * @param {string} payload message body
+ */
 const sendMessageToClient = (url, connectionId, payload) =>
   new Promise((resolve, reject) => {
     const apigatewaymanagementapi = new AWS.ApiGatewayManagementApi({
       apiVersion: "2018-11-29",
       endpoint: url,
     });
+
     apigatewaymanagementapi.postToConnection(
       {
         ConnectionId: connectionId, // connectionId of the receiving ws-client
-        Data: JSON.stringify(payload),
+        Data: payload,
       },
       (err, data) => {
         if (err) {
@@ -19,15 +29,38 @@ const sendMessageToClient = (url, connectionId, payload) =>
     );
   });
 
-module.exports.handler = async (event, context) => {
-  console.log(event);
-  const domain = event.requestContext.domainName;
-  const stage = event.requestContext.stage;
-  const connectionId = event.requestContext.connectionId;
+module.exports.handler = async (event) => {
+  const { domainName, stage } = event.requestContext.domainName;
+  // const senderConnectionId = event.requestContext.connectionId;
+
   const callbackUrlForAWS = util.format(
-    util.format("https://%s/%s", domain, stage)
-  ); //construct the needed url
-  await sendMessageToClient(callbackUrlForAWS, connectionId, event);
+    util.format("https://%s/%s", domainName, stage)
+  );
+
+  const docclient = new AWS.DynamoDB.DocumentClient({
+    apiVersion: "2012-08-10",
+  });
+  const { CONNECTION_TABLE } = process.env;
+
+  const param = {
+    TableName: CONNECTION_TABLE,
+    IndexName: "liveId-index",
+    KeyConditionExpression: "#l = :l",
+    ExpressionAttributeNames: {
+      "#l": "liveId",
+    },
+    ExpressionAttributeValues: {
+      ":l": "test-live",
+    },
+  };
+
+  const { Items = [] } = await docclient.query(param).promise();
+
+  await Promise.all(
+    Items.map((item) =>
+      sendMessageToClient(callbackUrlForAWS, item.connectionId, event.body)
+    )
+  );
 
   return {
     statusCode: 200,

@@ -18,6 +18,9 @@ provider:
       Action:
         - dynamodb:DescribeTable
         - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:Query
       Resource:
         - Fn::Join:
             - ":"
@@ -25,6 +28,12 @@ provider:
               - ${self:provider.region}
               - Ref: "AWS::AccountId"
               - table/${self:custom.CONNECTION_TABLE}
+        - Fn::Join:
+            - ":"
+            - - arn:aws:dynamodb
+              - ${self:provider.region}
+              - Ref: "AWS::AccountId"
+              - table/${self:custom.CONNECTION_TABLE}/index/liveId-index
 
 custom:
   CONNECTION_TABLE: campusonair-connection-table

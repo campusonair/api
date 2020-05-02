@@ -1,5 +1,5 @@
 {
-  "name": "sandbox-serverless-websocket-dynamodb",
+  "name": "@campusonair/api",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
