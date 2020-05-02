@@ -10,8 +10,6 @@ provider:
   stage: v1
   websocketsApiName: serverless-ws
   websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
-  logs:
-    websocket: true
   # environment:
     # CONNECTION_TABLE: ${env:CONNECTION_TABLE}
   # iamRoleStatements:
