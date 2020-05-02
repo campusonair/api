@@ -1,0 +1,51 @@
+service: sandbox-sls-ws-ddb
+
+frameworkVersion: '>=1.69.0 <2.0.0'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  region: ap-northeast-1
+  stage: v1
+  websocketsApiName: serverless-ws
+  websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
+  logs:
+    websocket: true
+  # environment:
+    # CONNECTION_TABLE: ${env:CONNECTION_TABLE}
+  # iamRoleStatements:
+  #   - Effect: Allow
+  #     Action:
+  #       - dynamodb:DescribeTable
+  #       - dynamodb:GetItem
+  #     Resource:
+  #       - Fn::Join:
+  #           - ':'
+  #           - - arn:aws:dynamodb
+  #             - ${self:provider.region}
+  #             - Ref: 'AWS::AccountId'
+  #             - table/${env:CONNECTION_TABLE}
+
+package:
+  exclude:
+    - .circleci/**
+    - .git/**
+    - bin/**
+    - test/**
+    - docs/**
+    - .*
+    - package-lock.json
+    - yarn.lock
+    - README.md
+
+functions:
+  connect:
+    handler: src/connect.handler
+    events:
+      - websocket: $connect
+
+  disconnect:
+    handler: src/disconnect.handler
+    events:
+      - websocket: $disconnect

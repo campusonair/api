@@ -1,0 +1,12 @@
+{
+  "name": "sandbox-serverless-websocket-dynamodb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "serverless": "^1.69.0"
+  },
+  "scripts": {
+    "deploy": "sls deploy"
+  }
+}
