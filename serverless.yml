@@ -1,6 +1,6 @@
 service: sandbox-sls-ws-ddb
 
-frameworkVersion: '>=1.69.0 <2.0.0'
+frameworkVersion: ">=1.69.0 <2.0.0"
 
 provider:
   name: aws
@@ -10,20 +10,24 @@ provider:
   stage: v1
   websocketsApiName: serverless-ws
   websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
-  # environment:
-    # CONNECTION_TABLE: ${env:CONNECTION_TABLE}
-  # iamRoleStatements:
-  #   - Effect: Allow
-  #     Action:
-  #       - dynamodb:DescribeTable
-  #       - dynamodb:GetItem
-  #     Resource:
-  #       - Fn::Join:
-  #           - ':'
-  #           - - arn:aws:dynamodb
-  #             - ${self:provider.region}
-  #             - Ref: 'AWS::AccountId'
-  #             - table/${env:CONNECTION_TABLE}
+
+  environment:
+    CONNECTION_TABLE: ${self:custom.CONNECTION_TABLE}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:GetItem
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - arn:aws:dynamodb
+              - ${self:provider.region}
+              - Ref: "AWS::AccountId"
+              - table/${self:custom.CONNECTION_TABLE}
+
+custom:
+  CONNECTION_TABLE: campusonair-connection-table
 
 package:
   exclude:
@@ -47,3 +51,8 @@ functions:
     handler: src/disconnect.handler
     events:
       - websocket: $disconnect
+
+  default:
+    handler: src/default.handler
+    events:
+      - websocket: $default
