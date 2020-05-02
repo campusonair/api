@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 
-module.exports.handler = async (event, context) => {
+module.exports.handler = async (event) => {
   const docclient = new AWS.DynamoDB.DocumentClient({
     apiVersion: "2012-08-10",
   });
