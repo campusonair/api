@@ -65,6 +65,57 @@ functions:
     handler: src/default.handler
     events:
       - websocket: $default
-      
+
+  listLive:
+    handler: src/lives/listLive.handler
+    events:
+      - http:
+          path: lives
+          method: get
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  createLive:
+    handler: src/lives/createLive.handler
+    events:
+      - http:
+          path: live
+          method: post
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  getLive:
+    handler: src/lives/getLive.handler
+    events:
+      - http:
+          path: live/{liveId}
+          method: get
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  updateLive:
+    handler: src/lives/updateLive.handler
+    events:
+      - http:
+          path: live/{liveId}
+          method: put
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  deleteLive:
+    handler: src/lives/deleteLive.handler
+    events:
+      - http:
+          path: live/{liveId}
+          method: delete
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
 plugins:
   - serverless-offline
+  - serverless-plugin-typescript
