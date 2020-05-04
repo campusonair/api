@@ -13,7 +13,6 @@ const sendMessageToClient = (url, connectionId, payload) =>
       apiVersion: "2018-11-29",
       endpoint: url,
     });
-
     apigatewaymanagementapi.postToConnection(
       {
         ConnectionId: connectionId, // connectionId of the receiving ws-client
@@ -40,6 +39,7 @@ module.exports.handler = async (event) => {
   const docclient = new AWS.DynamoDB.DocumentClient({
     apiVersion: "2012-08-10",
   });
+
   const { CONNECTION_TABLE } = process.env;
 
   const param = {

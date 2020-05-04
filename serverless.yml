@@ -65,3 +65,6 @@ functions:
     handler: src/default.handler
     events:
       - websocket: $default
+      
+plugins:
+  - serverless-offline
