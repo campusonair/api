@@ -117,5 +117,5 @@ functions:
             origin: "*"
 
 plugins:
-  - serverless-offline
   - serverless-plugin-typescript
+  - serverless-offline
