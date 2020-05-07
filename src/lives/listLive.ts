@@ -1,5 +1,4 @@
 module.exports.handler = async (event, context, callback) => {
-  console.log("hoihoihoi")
   return callback(null,
     {
       statusCode: 200,
@@ -7,6 +6,6 @@ module.exports.handler = async (event, context, callback) => {
         'Content-Type': 'text/html',
         'Access-Control-Allow-Origin': '*',
       },
-      body: "<h1>7777777777777777777777</h1>"
+      body: "<h1>helllo</h1>"
     });
 };
