@@ -7,6 +7,10 @@
 ## deploy
 
 ```shell
+$ git clone git@github.com:campusonair/api.git
+$ cd api
+$ cp .envrc.sample .envrc
+$ vi .envrc
 $ yarn
 $ npm run deploy
 ```
