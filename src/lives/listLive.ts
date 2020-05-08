@@ -1,11 +1,13 @@
-module.exports.handler = async (event, context, callback) => {
+import * as lambda from 'aws-lambda';
+
+export const handler = async (event: any, context: lambda.Context, callback: lambda.Callback) => {
   return callback(null,
     {
       statusCode: 200,
       headers: {
-        'Content-Type': 'text/html',
+        'Content-type': 'text/html',
         'Access-Control-Allow-Origin': '*',
       },
-      body: "<h1>helllo</h1>"
+      body: '<h1>Hello</h1>'
     });
 };

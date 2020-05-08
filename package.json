@@ -9,6 +9,8 @@
     "deploy": "sls deploy --stage dev"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.51",
+    "@types/node": "^13.13.5",
     "aws-sdk": "^2.668.0",
     "serverless": "^1.69.0",
     "serverless-offline": "^6.1.4",
