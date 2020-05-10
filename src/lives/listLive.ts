@@ -1,5 +1,5 @@
 import * as lambda from 'aws-lambda';
-import AWS from 'aws-sdk';
+// import AWS from 'aws-sdk';
 
 type response = {
   statusCode: number,
