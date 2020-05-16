@@ -7,7 +7,7 @@
 //  * @param {string} connectionId connectionId
 //  * @param {string} payload message body
 //  */
-// const sendMessageToClient = (url, connectionId, payload) =>
+// const sendMessageToClient = (url: any, connectionId: any, payload: any) =>
 //   new Promise((resolve, reject) => {
 //     const apigatewaymanagementapi = new AWS.ApiGatewayManagementApi({
 //       apiVersion: "2018-11-29",
@@ -54,10 +54,10 @@
 //     },
 //   };
 
-//   const { Items = [] } = await docclient.query(param).promise();
+//   const { Items = [] } = await docclient.query(param: TableName).promise();
 
 //   await Promise.all(
-//     Items.map((item) =>
+//     Items.map((item: any) =>
 //       sendMessageToClient(callbackUrlForAWS, item.connectionId, event.body)
 //     )
 //   );

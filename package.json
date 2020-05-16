@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "amazon-kinesis-video-streams-webrtc": "^1.0.8"
+  },
   "scripts": {
     "start": "sls offline start --stage dev",
     "deploy": "sls deploy --stage dev"
