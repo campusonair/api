@@ -6,6 +6,10 @@ const channelTableName = process.env.CHANNEL_TABLE;
 module.exports.handler = async (event) => {
   const { principalId } = event; // Auth0 user sub
 
+  if(!principalId) {
+    throw new Error('no principal ID')
+  }
+
   const docClient = new AWS.DynamoDB.DocumentClient({
     apiVersion: "2012-08-10",
   });

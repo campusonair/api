@@ -6,8 +6,10 @@ const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY;
 
 // Reusable Authorizer function, set on `authorizer` field in serverless.yml
 module.exports.handler = (event, _1, callback) => {
+  return callback("Unauthorized 0");
   if (!event.authorizationToken) {
-    return callback("Unauthorized");
+    console.log(1)
+    return callback("Unauthorized a");
   }
 
   const tokenParts = event.authorizationToken.split(" ");
@@ -15,7 +17,8 @@ module.exports.handler = (event, _1, callback) => {
 
   if (!(tokenParts[0].toLowerCase() === "bearer" && tokenValue)) {
     // no auth token!
-    return callback("Unauthorized");
+    console.log(2)
+    return callback("Unauthorized b");
   }
   const options = {
     audience: AUTH0_CLIENT_ID,
@@ -29,8 +32,10 @@ module.exports.handler = (event, _1, callback) => {
       (verifyError, decoded) => {
         if (verifyError) {
           // 401 Unauthorized
-          return callback("Unauthorized");
+          console.log(3)
+          return callback("Unauthorized c");
         }
+        console.log('ok')
         return callback(
           null,
           {principalId: decoded.sub }
@@ -38,6 +43,7 @@ module.exports.handler = (event, _1, callback) => {
       }
     );
   } catch (err) {
-    return callback("Unauthorized");
+    console.log(4)
+    return callback("Unauthorized d");
   }
 };
