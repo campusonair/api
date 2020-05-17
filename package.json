@@ -6,7 +6,10 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "deploy": "sls deploy"
+    "deploy": "sls deploy",
+    "test": "sls deploy --noDeploy --stage dev",
+    "deploy:dev": "sls deploy --stage=dev",
+    "deploy:v1": "sls deploy --stage=v1"
   },
   "devDependencies": {
     "aws-sdk": "^2.668.0",
