@@ -2,7 +2,9 @@
 
 ## Prerequisite
 
-- AWS DynamoDB named `campusonair-connection-table` with HashKey named `connectionId` and SGI named `liveId-index`
+- AWS DynamoDB Tables:
+  - `campusonair-connection-table` with a hash key named `connectionId` and a secondary global index named `liveId-index`
+  - `campusonair-channel-table` with a hash key named `principalId` and a secondary global index named `channelName-index`
 
 ## Features
 

@@ -4,15 +4,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  },
   "scripts": {
-    "deploy": "sls deploy",
+    "start": "sls offline",
     "test": "sls deploy --noDeploy --stage dev",
     "deploy:dev": "sls deploy --stage=dev",
     "deploy:v1": "sls deploy --stage=v1"
   },
   "devDependencies": {
     "aws-sdk": "^2.668.0",
-    "serverless": "^1.69.0"
+    "serverless": "^1.69.0",
+    "serverless-offline": "^6.1.5"
   }
 }

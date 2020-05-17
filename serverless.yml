@@ -2,6 +2,9 @@ service: api
 
 frameworkVersion: ">=1.69.0 <2.0.0"
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -13,6 +16,7 @@ provider:
 
   environment:
     CONNECTION_TABLE: ${self:custom.CONNECTION_TABLE}
+    CHANNEL_TABLE: ${self:custom.CHANNEL_TABLE}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -35,8 +39,29 @@ provider:
               - Ref: "AWS::AccountId"
               - table/${self:custom.CONNECTION_TABLE}/index/liveId-index
 
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - arn:aws:dynamodb
+              - ${self:provider.region}
+              - Ref: "AWS::AccountId"
+              - table/${self:custom.CHANNEL_TABLE}
+        - Fn::Join:
+            - ":"
+            - - arn:aws:dynamodb
+              - ${self:provider.region}
+              - Ref: "AWS::AccountId"
+              - table/${self:custom.CONNECTION_TABLE}/index/channelName-index
 custom:
   CONNECTION_TABLE: campusonair-connection-table
+  CHANNEL_TABLE: campusonair-channle-table
 
 package:
   exclude:
@@ -65,3 +90,16 @@ functions:
     handler: src/websocket/default.handler
     events:
       - websocket: $default
+
+  auth:
+    handler: src/auth0.handler
+
+  getStudio:
+    handler: src/studio/get.handler
+    events:
+      - http:
+          path: studio
+          method: get
+          authorizer: auth
+          integration: lambda-proxy
+          cors: true
