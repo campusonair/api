@@ -1,4 +1,4 @@
-service: sandbox-sls-ws-ddb
+service: api
 
 frameworkVersion: ">=1.69.0 <2.0.0"
 
@@ -52,16 +52,16 @@ package:
 
 functions:
   connect:
-    handler: src/connect.handler
+    handler: src/websocket/connect.handler
     events:
       - websocket: $connect
 
   disconnect:
-    handler: src/disconnect.handler
+    handler: src/websocket/disconnect.handler
     events:
       - websocket: $disconnect
 
   default:
-    handler: src/default.handler
+    handler: src/websocket/default.handler
     events:
       - websocket: $default

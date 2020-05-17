@@ -1,8 +1,13 @@
-# CampusOnAir Websocket API
+# CampusOnAir API
 
 ## Prerequisite
 
 - AWS DynamoDB named `campusonair-connection-table` with HashKey named `connectionId` and SGI named `liveId-index`
+
+## Features
+
+- WebSocket server with API Gateway
+- Signaling Server with Amazon Kinesis Video
 
 ## deploy
 
