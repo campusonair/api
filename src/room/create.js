@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 module.exports.handler = (event, context, callback) => {
   const res = JSON.parse(event.body)
   const decoded = jwt.decode(res.idToken);
+
+
+  if(Date.now() > decoded.exp )
   console.log(decoded)
 
   callback(null, {

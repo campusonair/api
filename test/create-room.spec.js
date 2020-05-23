@@ -7,7 +7,8 @@ const jwt = require('jsonwebtoken');
 describe('Tests Embed API.', () => {
   it('Data should be returned', () => {
 
-    const expired = Date.now() + 1000
+    const now = Math.floor(Date.now()/1000)
+    const expired = now + 36000
     const rawJWT = {
       'nickname': 'Jhon',
       'name': 'info@example.com',
@@ -18,7 +19,7 @@ describe('Tests Embed API.', () => {
       'iss': 'https://campusonair.auth0.com/',
       'sub': 'email|5ec0f523580a1d9af4e7a564',
       'aud': 'ScSOjH0LjVN9DGkguloEVURUfdJCq9u2',
-      'iat': 1590214231,
+      'iat': now,
       'exp': expired,
       'nonce': 'Rk80ZzYySWNhSHRvXzd5eFdwQ1BIWWphS09wakNTcnZDWUJwT3JTZUdXWg=='
     }
