@@ -1,8 +1,10 @@
 'use strict';
+const jwt = require('jsonwebtoken');
 
 module.exports.handler = (event, context, callback) => {
   const res = JSON.parse(event.body)
-  console.log(res)
+  const decoded = jwt.decode(res.idToken);
+  console.log(decoded)
 
   callback(null, {
     statusCode: 200,

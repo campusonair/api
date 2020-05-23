@@ -22,7 +22,8 @@ describe('Tests Embed API.', () => {
       'exp': expired,
       'nonce': 'Rk80ZzYySWNhSHRvXzd5eFdwQ1BIWWphS09wakNTcnZDWUJwT3JTZUdXWg=='
     }
-    const token = jwt.sign(rawJWT, 'shhhhh');
+
+    const token = jwt.sign(rawJWT, 'aiueo');
     const event = {
       body: `{"peerId":"Hello","idToken":"${token}"}`
     }
