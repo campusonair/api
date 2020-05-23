@@ -54,17 +54,17 @@ package:
     - README.md
 
 functions:
-  connect:
-    handler: src/websocket/connect.handler
-    events:
-      - websocket: $connect
 
-  disconnect:
-    handler: src/websocket/disconnect.handler
+  room:
+    handler: src/room/create.ts
     events:
-      - websocket: $disconnect
-
-  default:
-    handler: src/websocket/default.handler
-    events:
-      - websocket: $default
+      - http:
+          path: room
+          method: get
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+            maxAge: 86400
+          response:
+            headers:
+              Cache-Control: "no-cache"
