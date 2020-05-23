@@ -2,13 +2,7 @@
 
 module.exports.handler = (event, context, callback) => {
   const res = JSON.parse(event.body)
-
-  const body = JSON.parse(event.body)
-  const peerId = body.peerId
-  console.log(peerId)
-
-  const idToken = body.idToken
-  console.log(idToken)
+  console.log(res)
 
   callback(null, {
     statusCode: 200,
