@@ -1,5 +1,5 @@
-const util = require("util");
-const AWS = require("aws-sdk");
+const util = require('util');
+const AWS = require('aws-sdk');
 
 /**
  * おうむ返しをする WebSocket 関数
@@ -10,7 +10,7 @@ const AWS = require("aws-sdk");
 const sendMessageToClient = (url, connectionId, payload) =>
   new Promise((resolve, reject) => {
     const apigatewaymanagementapi = new AWS.ApiGatewayManagementApi({
-      apiVersion: "2018-11-29",
+      apiVersion: '2018-11-29',
       endpoint: url,
     });
 
@@ -21,7 +21,7 @@ const sendMessageToClient = (url, connectionId, payload) =>
       },
       (err, data) => {
         if (err) {
-          console.log("err is", err);
+          // console.log('err is', err);
           reject(err);
         }
         resolve(data);
@@ -34,23 +34,23 @@ module.exports.handler = async (event) => {
   // const senderConnectionId = event.requestContext.connectionId;
 
   const callbackUrlForAWS = util.format(
-    util.format("https://%s/%s", domainName, stage)
+    util.format('https://%s/%s', domainName, stage)
   );
 
   const docclient = new AWS.DynamoDB.DocumentClient({
-    apiVersion: "2012-08-10",
+    apiVersion: '2012-08-10',
   });
   const { CONNECTION_TABLE } = process.env;
 
   const param = {
     TableName: CONNECTION_TABLE,
-    IndexName: "liveId-index",
-    KeyConditionExpression: "#l = :l",
+    IndexName: 'liveId-index',
+    KeyConditionExpression: '#l = :l',
     ExpressionAttributeNames: {
-      "#l": "liveId",
+      '#l': 'liveId',
     },
     ExpressionAttributeValues: {
-      ":l": "test-live",
+      ':l': 'test-live',
     },
   };
 

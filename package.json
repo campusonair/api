@@ -11,6 +11,7 @@
     "test": "npm run test:lint && npm run test:mocha && sls deploy --noDeploy --stage dev",
     "test:mocha": "mocha --recursive --exit",
     "test:lint": "eslint \"src/**/*.js\" \"test/**/*.js\"",
+    "test:fix": "eslint \"src/**/*.js\" \"test/**/*.js\" --fix",
     "deploy:dev": "sls deploy --stage=dev",
     "deploy:v1": "sls deploy --stage=v1"
   },
