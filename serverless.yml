@@ -74,7 +74,7 @@ functions:
     events:
       - http:
           path: room
-          method: get
+          method: post
           integration: lambda-proxy
           cors:
             origin: "*"
