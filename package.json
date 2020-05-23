@@ -8,6 +8,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "scripts": {
+    "postinstall": "curl https://campusonair.auth0.com/pem > ./auth0.pub",
     "start": "sls offline start --stage dev",
     "deploy": "sls deploy",
     "test": "npm run test:lint && npm run test:mocha && sls deploy --noDeploy --stage dev",
