@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports.handler = (event, context, callback) => {
-
-  console.log(event)
+  const res = JSON.parse(event.body)
 
   const body = JSON.parse(event.body)
   const peerId = body.peerId
@@ -16,6 +15,6 @@ module.exports.handler = (event, context, callback) => {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    body: JSON.stringify({})
+    body: JSON.stringify(res)
   });
 };
