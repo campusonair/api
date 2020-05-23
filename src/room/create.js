@@ -1,14 +1,13 @@
 'use strict';
 
 module.exports.handler = (event, context, callback) => {
-
-  console.log(event)
+  const res = JSON.parse(event.body)
 
   callback(null, {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    body: JSON.stringify({})
+    body: JSON.stringify(res)
   });
 };
