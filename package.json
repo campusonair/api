@@ -8,12 +8,15 @@
   "scripts": {
     "start": "sls offline start --stage dev",
     "deploy": "sls deploy",
-    "test": "sls deploy --noDeploy --stage dev",
+    "test": "npm run test:lint && npm run test:mocha && sls deploy --noDeploy --stage dev",
+    "test:mocha": "mocha --recursive --exit",
+    "test:lint": "eslint \"src/**/*.js\" \"test/**/*.js\"",
     "deploy:dev": "sls deploy --stage=dev",
     "deploy:v1": "sls deploy --stage=v1"
   },
   "devDependencies": {
     "aws-sdk": "^2.668.0",
+    "chai": "^4.2.0",
     "serverless": "^1.69.0",
     "serverless-offline": "^6.1.7"
   }
