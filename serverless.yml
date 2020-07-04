@@ -82,30 +82,62 @@ package:
     - README.md
 
 functions:
-  connect:
-    handler: src/websocket/connect.handler
-    events:
-      - websocket: $connect
-
-  disconnect:
-    handler: src/websocket/disconnect.handler
-    events:
-      - websocket: $disconnect
-
-  default:
-    handler: src/websocket/default.handler
-    events:
-      - websocket: $default
-
-  auth:
-    handler: src/auth0.handler
-
-  getStudio:
-    handler: src/studio/get.handler
+  createMeeting:
+    handler: src/createMeeting.handler
     events:
       - http:
-          path: studio
-          method: get
-          authorizer: auth
+          path: meeting
+          method: post
           integration: lambda-proxy
-          cors: true
+          cors:
+            origin: "*"
+
+  listMeeting:
+    handler: src/listMeeting.handler
+    events:
+      - http:
+          path: meetings
+          method: get
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  getMeeting:
+    handler: src/getMeeting.handler
+    events:
+      - http:
+          path: meeting/{meetingId}
+          method: get
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  updateMeeting:
+    handler: src/updateMeeting.handler
+    events:
+      - http:
+          path: meeting/{meetingId}
+          method: put
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  updateMember:
+    handler: src/updateMember.handler
+    events:
+      - http:
+          path: meeting/{meetingId}/{userId}
+          method: put
+          integration: lambda-proxy
+          cors:
+            origin: "*"
+
+  deleteMeeting:
+    handler: src/deleteMeeting.handler
+    events:
+      - http:
+          path: meeting/{meetingId}
+          method: delete
+          integration: lambda-proxy
+          cors:
+            origin: "*"
