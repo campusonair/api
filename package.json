@@ -16,7 +16,7 @@
     "deploy:v1": "sls deploy --stage=v1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.668.0",
+    "aws-sdk": "^2.814.0",
     "chai": "^4.2.0",
     "serverless": "^1.69.0",
     "serverless-offline": "^6.1.7"
