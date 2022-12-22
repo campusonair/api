@@ -19,6 +19,6 @@
     "aws-sdk": "^2.668.0",
     "chai": "^4.2.0",
     "serverless": "^1.69.0",
-    "serverless-offline": "^6.1.7"
+    "serverless-offline": "^12.0.3"
   }
 }
